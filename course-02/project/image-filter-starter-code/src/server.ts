@@ -26,11 +26,23 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   //    image_url: URL of a publicly accessible image
   // RETURNS
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
-
+  // Sample request:
+  // http://localhost:8082/filterimage?image_url=https://udacity-cloud-developer-20200314.s3.amazonaws.com/img/trees.jpg
   /**************************************************************************** */
-
+  app.get( "/filterimage", async ( req, res ) => {
+    const { image_url } = req.query;
+    if ( !image_url ) {
+      return res.status(400)
+                .send(`image_url is required`);
+    }
+    const filtered_image_path = await filterImageFromURL(image_url);
+    res.status(200).sendFile(filtered_image_path)
+    res.on('finish', function(){
+      deleteLocalFiles([filtered_image_path]);
+    });
+  })
   //! END @TODO1
-  
+
   // Root Endpoint
   // Displays a simple message to the user
   app.get( "/", async ( req, res ) => {
