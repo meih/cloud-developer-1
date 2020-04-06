@@ -27,9 +27,9 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // RETURNS
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
   // Sample request:
-  // http://localhost:8082/filterimage?image_url=https://udacity-cloud-developer-20200314.s3.amazonaws.com/img/trees.jpg
+  // http://localhost:8082/filteredimage?image_url=https://udacity-cloud-developer-20200314.s3.amazonaws.com/img/trees.jpg
   /**************************************************************************** */
-  app.get( "/filterimage", async ( req, res ) => {
+  app.get( "/filteredimage", async ( req, res ) => {
     const { image_url } = req.query;
     if ( !image_url ) {
       return res.status(400)
