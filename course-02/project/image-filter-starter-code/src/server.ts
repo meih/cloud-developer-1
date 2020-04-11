@@ -1,4 +1,4 @@
-import express from 'express';
+import express, {Request, Response} from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
@@ -29,7 +29,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // Sample request:
   // http://localhost:8082/filteredimage?image_url=https://udacity-cloud-developer-20200314.s3.amazonaws.com/img/trees.jpg
   /**************************************************************************** */
-  app.get( "/filteredimage", async ( req, res ) => {
+  app.get( "/filteredimage", async ( req: Request, res: Response ) => {
     const { image_url } = req.query;
     if ( !image_url ) {
       return res.status(400)
@@ -45,7 +45,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
 
   // Root Endpoint
   // Displays a simple message to the user
-  app.get( "/", async ( req, res ) => {
+  app.get( "/", async ( req: Request, res: Response ) => {
     res.send("try GET /filteredimage?image_url={{}}")
   } );
   
